@@ -1,215 +1,130 @@
-!DOCTYPE html
-html lang=tr
-head
-meta charset=UTF-8
-meta name=viewport content=width=device-width, initial-scale=1.0
-titleGenel Web Sitesititle
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRTube</title>
 
-style
-
-{
-margin0;
-padding0;
-box-sizingborder-box;
-font-familyArial, Helvetica, sans-serif;
-}
+<style>
 
 body{
-background#f4f4f4;
-color#333;
+margin:0;
+font-family:Arial;
+background:#0f0f0f;
+color:white;
 }
 
- Navbar 
+/* Navbar */
 
-nav{
-background#222;
-colorwhite;
-displayflex;
-justify-contentspace-between;
-align-itemscenter;
-padding15px 10%;
+header{
+background:#000;
+padding:15px 30px;
+font-size:26px;
+font-weight:bold;
+color:red;
 }
 
-nav h1{
-font-size22px;
+/* Upload */
+
+.upload{
+padding:20px;
+background:#181818;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
-nav ul{
-list-stylenone;
-displayflex;
+input,button{
+padding:10px;
+border:none;
+border-radius:6px;
 }
 
-nav ul li{
-margin-left20px;
+input{
+background:#222;
+color:white;
 }
 
-nav ul li a{
-colorwhite;
-text-decorationnone;
-font-size16px;
+button{
+background:red;
+color:white;
+cursor:pointer;
 }
 
- Hero 
+/* Video grid */
 
-.hero{
-height70vh;
-backgroundlinear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-url(httpspicsum.photos1200800);
-background-sizecover;
-displayflex;
-justify-contentcenter;
-align-itemscenter;
-text-aligncenter;
-colorwhite;
-}
-
-.hero h2{
-font-size45px;
-margin-bottom15px;
-}
-
-.hero p{
-font-size20px;
-}
-
- Services 
-
-.services{
-padding60px 10%;
-backgroundwhite;
-}
-
-.services h2{
-text-aligncenter;
-margin-bottom40px;
-}
-
-.service-box{
-displaygrid;
-grid-template-columnsrepeat(auto-fit,minmax(250px,1fr));
-gap20px;
+#videos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+padding:20px;
 }
 
 .card{
-background#f9f9f9;
-padding25px;
-border-radius10px;
-box-shadow0 2px 10px rgba(0,0,0,0.1);
-text-aligncenter;
+background:#181818;
+padding:10px;
+border-radius:10px;
 }
 
- About 
-
-.about{
-padding60px 10%;
-text-aligncenter;
+video{
+width:100%;
+border-radius:8px;
 }
 
- Contact 
-
-.contact{
-background#222;
-colorwhite;
-padding40px 10%;
-text-aligncenter;
+.title{
+margin:10px 0;
+font-size:18px;
 }
 
-.contact input,
-.contact textarea{
-width100%;
-max-width400px;
-padding10px;
-margin10px 0;
-bordernone;
-border-radius5px;
+</style>
+
+</head>
+
+<body>
+
+<header>TRTube</header>
+
+<div class="upload">
+
+<input type="text" id="title" placeholder="Video başlığı">
+
+<input type="file" id="videoFile" accept="video/*">
+
+<button onclick="uploadVideo()">Video Yükle</button>
+
+</div>
+
+<div id="videos"></div>
+
+<script>
+
+function uploadVideo(){
+
+let title = document.getElementById("title").value
+let file = document.getElementById("videoFile").files[0]
+
+if(!title || !file){
+alert("Video ve başlık ekle")
+return
 }
 
-.contact button{
-padding10px 25px;
-bordernone;
-background#ff6600;
-colorwhite;
-border-radius5px;
-cursorpointer;
+let url = URL.createObjectURL(file)
+
+let container = document.getElementById("videos")
+
+let card = document.createElement("div")
+card.className="card"
+
+card.innerHTML = `
+<div class="title">${title}</div>
+<video controls src="${url}"></video>
+`
+
+container.appendChild(card)
+
 }
 
- Footer 
+</script>
 
-footer{
-background#111;
-colorwhite;
-text-aligncenter;
-padding15px;
-}
-
-style
-head
-
-body
-
-nav
-h1WebSiteh1
-ul
-lia href=#Ana Sayfaali
-lia href=#Hizmetlerali
-lia href=#Hakkımızdaali
-lia href=#İletişimali
-ul
-nav
-
-section class=hero
-div
-h2Hoş Geldinizh2
-pModern ve basit web sitesi tasarımıp
-div
-section
-
-section class=services
-h2Hizmetlerimizh2
-
-div class=service-box
-
-div class=card
-h3Web Tasarımh3
-pModern ve hızlı web siteleri tasarlıyoruz.p
-div
-
-div class=card
-h3SEOh3
-pGoogle'da üst sıralara çıkmanıza yardımcı oluyoruz.p
-div
-
-div class=card
-h3Destekh3
-p724 teknik destek hizmeti veriyoruz.p
-div
-
-div
-section
-
-section class=about
-h2Hakkımızdah2
-pBiz modern web çözümleri üreten bir ekip olarak müşterilerimize kaliteli hizmet sunuyoruz.p
-section
-
-section class=contact
-h2İletişimh2
-
-form
-input type=text placeholder=Adınız
-br
-input type=email placeholder=Email
-br
-textarea placeholder=Mesajınıztextarea
-br
-buttonGönderbutton
-form
-
-section
-
-footer
-p© 2026 Tüm Hakları Saklıdırp
-footer
-
-body
-html
+</body>
+</html>
